@@ -84,8 +84,8 @@ public class NewDateUtilities {
         return thisDate;
     }
     /**
-     * This Method doesn't work. Grr. It is supposed to take 2 strings and a format create two date objects and then 
-     * provide their difference in days. It blows up presently.
+     * This Method takes two strings of dates and a format of those two strings, it then
+     * converts the strings into LocalDateTime objects and finds the difference in days between them.
      * 
      * @param date1 String of first Date
      * @param date2 String of Second Date
