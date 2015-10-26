@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author andre_000
  */
-public class NewDateUtilities {
+public class NewDateUtilities1 {
     //Student API: students should complete this lab by one week from today:
     // Create a custom "DateUtilities" class similar to the one demonstrated 
     // by your instructor. However, yours should use the new Java 8 Date/Time API.
@@ -26,12 +26,12 @@ public class NewDateUtilities {
   
   
   
-  private static NewDateUtilities instance;
+  private static NewDateUtilities1 instance;
    
   
-  public static NewDateUtilities getInstance() {
+  public static NewDateUtilities1 getInstance() {
         if (instance == null) {
-            instance = new NewDateUtilities();
+            instance = new NewDateUtilities1();
         }
 
         return instance;
@@ -68,15 +68,23 @@ public class NewDateUtilities {
      * @param string the date you are creating
      * @param dateFormat the format of the string you are providing.
      * @return 
+     * @throws student.lab.DateStringAndFormatDoNotMatchException 
      */
     
-    public LocalDate stringToLocalDate(String string, String dateFormat){
+    public LocalDate stringToLocalDate(String string, String dateFormat) throws DateStringAndFormatDoNotMatchException{
+            if (string.length() != dateFormat.length()){
+            throw new DateStringAndFormatDoNotMatchException();
+        }
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDate thisDate = LocalDate.parse(string, formatter);
         return thisDate;
     }
     
-    public LocalDateTime stringToLocalDateTime(String string, String dateFormat) {
+    public LocalDateTime stringToLocalDateTime(String string, String dateFormat) throws DateStringAndFormatDoNotMatchException {
+        if (string.length() != dateFormat.length()){
+            throw new DateStringAndFormatDoNotMatchException();
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDateTime thisDate = LocalDateTime.parse(string, formatter);
         return thisDate;
@@ -94,7 +102,9 @@ public class NewDateUtilities {
     public long diffBetweenTwoLocalDateTimes(String date1, String date2, String dateFormat){
         LocalDateTime thisDate = stringToLocalDateTime(date1, dateFormat);
         LocalDateTime thisDate2 = stringToLocalDateTime(date2, dateFormat);
-
+        
+         // grr
+      
         Duration diff = Duration.between(thisDate, thisDate2);
         long days = (diff.toDays());
         return days;
@@ -102,7 +112,7 @@ public class NewDateUtilities {
     
     
     public static void main(String[] args){
-        NewDateUtilities dateUtil = NewDateUtilities.getInstance();
+        NewDateUtilities1 dateUtil = NewDateUtilities1.getInstance();
         LocalDate date = LocalDate.now();
         LocalDateTime date1 = LocalDateTime.now();
         
@@ -110,7 +120,7 @@ public class NewDateUtilities {
         System.out.println(dateUtil.dateTimeToString2(date1, "MM-dd-yyyy hh:mm"));
         //
         System.out.println(dateUtil.stringToLocalDate("06-10-2015", "MM-dd-yyyy"));
-        
+        // needs catch to run now.
         System.out.println(dateUtil.stringToLocalDateTime("11-20-1981 01:30", "MM-dd-yyyy HH:mm"));
         
         System.out.println(dateUtil.diffBetweenTwoLocalDateTimes("10-26-2015 10:00", "10-28-2015 10:00", "MM-dd-yyyy HH:mm") + " days.");
