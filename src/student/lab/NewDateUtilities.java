@@ -94,8 +94,8 @@ public class NewDateUtilities {
      */
      
     public long diffBetweenTwoLocalDateTimes(String date1, String date2, String dateFormat){
-        LocalDate thisDate = stringToLocalDate(date1, dateFormat);
-        LocalDate thisDate2 = stringToLocalDate(date2, dateFormat);
+        LocalDateTime thisDate = stringToLocalDateTime(date1, dateFormat);
+        LocalDateTime thisDate2 = stringToLocalDateTime(date2, dateFormat);
         
          // grr
       
