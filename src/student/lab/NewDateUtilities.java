@@ -92,7 +92,7 @@ public class NewDateUtilities {
      * @param dateFormat the format of your strings.
      * @return the difference in Days.
      */
-    
+     
     public long diffBetweenTwoLocalDateTimes(String date1, String date2, String dateFormat){
         LocalDate thisDate = stringToLocalDate(date1, dateFormat);
         LocalDate thisDate2 = stringToLocalDate(date2, dateFormat);
