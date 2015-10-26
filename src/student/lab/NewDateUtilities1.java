@@ -68,7 +68,7 @@ public class NewDateUtilities1 {
      * @param string the date you are creating
      * @param dateFormat the format of the string you are providing.
      * @return 
-     * @throws student.lab.DateStringAndFormatDoNotMatchException 
+     * @throws student.lab.DateStringAndFormatDoNotMatchException if the length of the strings do not match.
      */
     
     public LocalDate stringToLocalDate(String string, String dateFormat) throws DateStringAndFormatDoNotMatchException{
@@ -97,9 +97,23 @@ public class NewDateUtilities1 {
      * @param date2 String of Second Date
      * @param dateFormat the format of your strings.
      * @return the difference in Days.
+     * @throws student.lab.DateStringAndFormatDoNotMatchException if the length of the strings do not match.
      */
      
-    public long diffBetweenTwoLocalDateTimes(String date1, String date2, String dateFormat){
+    /**
+     * This Method takes two strings of dates and a format of those two strings, it then
+ converts the strings into LocalDateTime objects and finds the difference in days between them.
+     * @param date1 String of first Date
+     * @param date2 String of Second Date
+     * @param dateFormat the format of your strings.
+     * @return the difference in Days.
+     * @throws student.lab.DateStringAndFormatDoNotMatchException
+     */
+    public long diffBetweenTwoLocalDateTimes(String date1, String date2, String dateFormat) throws DateStringAndFormatDoNotMatchException{
+        if( date1.length() != dateFormat.length() || date2.length() != dateFormat.length()){
+            throw new DateStringAndFormatDoNotMatchException();
+        }
+        
         LocalDateTime thisDate = stringToLocalDateTime(date1, dateFormat);
         LocalDateTime thisDate2 = stringToLocalDateTime(date2, dateFormat);
         
