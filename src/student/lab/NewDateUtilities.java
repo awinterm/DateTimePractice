@@ -114,6 +114,15 @@ public class NewDateUtilities {
         System.out.println(dateUtil.stringToLocalDateTime("11-20-1981 01:30", "MM-dd-yyyy HH:mm"));
         
         System.out.println(dateUtil.diffBetweenTwoLocalDateTimes("10-26-2015 10:00", "10-28-2015 10:00", "MM-dd-yyyy HH:mm") + " days.");
+    
+        
+        LocalDate date4 = LocalDate.now();
+        
+        
+        
+       
+        
+    
     }
     
 }

@@ -1,6 +1,9 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package student.lab;
-
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -12,26 +15,13 @@ import java.time.format.DateTimeFormatter;
  *
  * @author andre_000
  */
-public class NewDateUtilities1 {
-    //Student API: students should complete this lab by one week from today:
-    // Create a custom "DateUtilities" class similar to the one demonstrated 
-    // by your instructor. However, yours should use the new Java 8 Date/Time API.
-    // You must provide a minimum of two methods for converting Date/Time
-   //  objects to formatted strings; and you must provide a minimum of two
-   //  methods to convert formatted strings to Date/Time objects. And you must 
-   //  provide at least one method for performing Date/Time arithmetic, such 
-   //  as the number of months, days, minutes, etc., between two dates.
-  //   Experimentation is crucial to your success!
-
-  
-  
-  
-  private static NewDateUtilities1 instance;
-   
-  
-  public static NewDateUtilities1 getInstance() {
+public class NewDateUtilities2 {
+      
+    private static NewDateUtilities2 instance;
+    
+  public static NewDateUtilities2 getInstance() {
         if (instance == null) {
-            instance = new NewDateUtilities1();
+            instance = new NewDateUtilities2();
         }
 
         return instance;
@@ -44,7 +34,11 @@ public class NewDateUtilities1 {
    * @param dateFormat The format you want that date object to convert to as a String.
    * @return String of a LocalDate object.
    */
-    public String dateToString(LocalDate date, String dateFormat){
+    public String dateToString(LocalDate date, String dateFormat) throws IllegalArgumentException{
+        if (date == null || dateFormat == ""){
+           throw new IllegalArgumentException();
+        }
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         String formattedDate = date.format(formatter);
         return formattedDate;
@@ -57,7 +51,11 @@ public class NewDateUtilities1 {
      * @param dateFormat a format string of your choosing.
      * @return String of a LocalDateTime object
      */
-    public String dateTimeToString2(LocalDateTime date, String dateFormat){
+    public String dateTimeToString2(LocalDateTime date, String dateFormat) throws IllegalArgumentException{
+          if (date == null || dateFormat == ""){
+           throw new IllegalArgumentException();
+        }
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         String formattedDateTime = date.format(formatter);
         return formattedDateTime;
@@ -68,12 +66,12 @@ public class NewDateUtilities1 {
      * @param string the date you are creating
      * @param dateFormat the format of the string you are providing.
      * @return 
-     * @throws student.lab.DateStringAndFormatDoNotMatchException if the length of the strings do not match.
+     * @throws IllegalArgumentException if the length of the strings do not match.
      */
     
-    public LocalDate stringToLocalDate(String string, String dateFormat) throws DateStringAndFormatDoNotMatchException{
+    public LocalDate stringToLocalDate(String string, String dateFormat) throws IllegalArgumentException{
             if (string.length() != dateFormat.length()){
-            throw new DateStringAndFormatDoNotMatchException();
+            throw new IllegalArgumentException();
         }
         
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
@@ -81,9 +79,9 @@ public class NewDateUtilities1 {
         return thisDate;
     }
     
-    public LocalDateTime stringToLocalDateTime(String string, String dateFormat) throws DateStringAndFormatDoNotMatchException {
+    public LocalDateTime stringToLocalDateTime(String string, String dateFormat) throws IllegalArgumentException {
         if (string.length() != dateFormat.length()){
-            throw new DateStringAndFormatDoNotMatchException();
+            throw new IllegalArgumentException();
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
         LocalDateTime thisDate = LocalDateTime.parse(string, formatter);
@@ -97,7 +95,7 @@ public class NewDateUtilities1 {
      * @param date2 String of Second Date
      * @param dateFormat the format of your strings.
      * @return the difference in Days.
-     * @throws student.lab.DateStringAndFormatDoNotMatchException if the length of the strings do not match.
+     * @throws IllegalArgumentException if the length of the strings do not match.
      */
      
     /**
@@ -107,11 +105,11 @@ public class NewDateUtilities1 {
      * @param date2 String of Second Date
      * @param dateFormat the format of your strings.
      * @return the difference in Days.
-     * @throws student.lab.DateStringAndFormatDoNotMatchException
+     * @throws IllegalArgumentException
      */
-    public long diffBetweenTwoLocalDateTimes(String date1, String date2, String dateFormat) throws DateStringAndFormatDoNotMatchException{
+    public long diffBetweenTwoLocalDateTimes(String date1, String date2, String dateFormat) throws IllegalArgumentException{
         if( date1.length() != dateFormat.length() || date2.length() != dateFormat.length()){
-            throw new DateStringAndFormatDoNotMatchException();
+            throw new IllegalArgumentException();
         }
         
         LocalDateTime thisDate = stringToLocalDateTime(date1, dateFormat);
@@ -123,21 +121,4 @@ public class NewDateUtilities1 {
         long days = (diff.toDays());
         return days;
     }
-    
-    
-    public static void main(String[] args){
-        NewDateUtilities1 dateUtil = NewDateUtilities1.getInstance();
-        LocalDate date = LocalDate.now();
-        LocalDateTime date1 = LocalDateTime.now();
-        
-        System.out.println(dateUtil.dateToString(date, "MM-dd-yyyy"));
-        System.out.println(dateUtil.dateTimeToString2(date1, "MM-dd-yyyy hh:mm"));
-        // needs try catch catch to run
-        System.out.println(dateUtil.stringToLocalDate("06-10-2015", "MM-dd-yyyy"));
-        // needs try catch to run now.
-        System.out.println(dateUtil.stringToLocalDateTime("11-20-1981 01:30", "MM-dd-yyyy HH:mm"));
-        // needs try catch to run.
-        System.out.println(dateUtil.diffBetweenTwoLocalDateTimes("10-26-2015 10:00", "10-28-2015 10:00", "MM-dd-yyyy HH:mm") + " days.");
-    }
-    
 }
